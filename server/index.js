@@ -3,11 +3,11 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const Book = require("./Models/Bookmodel.js");
 
-const cors = require('cors');
+const Book = require("./Models/Bookmodel.js")
 
 const app =express();
 
-//middleware 
+//middleware s
 app.use(express.json());
 // 1st option --> by using defaculty function we can be used 
 app.use(cors());
@@ -33,7 +33,8 @@ app.post('/api/book', async (req, res) => {
       //  const book = await Book.create(req.body);
 
       const { Book_name, Book_id, author } = req.body;
-      const newbook = new Book({ Book_name,Book_id, author});
+
+      const newbook = new Product({ Book_name,Book_id, author});
       const savedbook = await newbook.save();
       res.status(200).json(savedbook) 
       
