@@ -1,5 +1,4 @@
-
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
 const BookSchema = new mongoose.Schema(
     {
@@ -8,7 +7,7 @@ const BookSchema = new mongoose.Schema(
             required: [true, "Please enter book name"]
         },
         Book_id: {
-            type: int,
+            type: Number,
             required: true,
             default: 0
         },

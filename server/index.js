@@ -1,8 +1,8 @@
-import express  from "express";
-import mongoose  from "mongoose";
+const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
-
 const Book = require("./Models/Bookmodel.js")
+
 
 const app =express();
 
@@ -13,7 +13,6 @@ app.get('/', async (req, res) => {
     res.send(" hello serever is ready to paly");
 })
 
-
 //save book on the database 
 
 app.post('/api/book', async (req, res) => {
@@ -22,8 +21,7 @@ app.post('/api/book', async (req, res) => {
       //  const Product = await Product.create(req.body);
 
       const { Book_name, Book_id, author } = req.body;
-
-      const newbook = new Product({ Book_name,Book_id, author});
+      const newbook = new Book({ Book_name,Book_id, author});
       const savedbook = await newbook.save();
       res.status(200).json(savedbook) 
       
