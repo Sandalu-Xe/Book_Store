@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const Book = require("./Models/Bookmodel.js")
 
-
 const app =express();
 
 //middleware 
@@ -108,4 +107,3 @@ mongoose.connect('mongodb+srv://user1:Thush12213@cluster0.9qwykfs.mongodb.net/Bo
 });
 
 console.log("hello there")
-
