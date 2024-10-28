@@ -44,7 +44,7 @@ app.post('/api/book', async (req, res) => {
     }
 });
 
-//dlete book from mongodb by using id 
+//FIND book from mongodb by using id 
 
 app.get('/api/book/:id', async (req, res) => {
     const { id } = req.params; // Get the ID from the request parameters
@@ -59,17 +59,16 @@ app.get('/api/book/:id', async (req, res) => {
     }
 });
 
-
-//upadate the book  by id
+//upadate the book by id
 
 app.put('/api/book/:id', async (req, res) => {
     try {
         const { id } = req.params;//.Get the ID from the request parameters
 
-        const book = await Product.findByIdAndUpdate(id, req.body);
+        const book = await Book.findByIdAndUpdate(id, req.body);
 
         if (!book) {
-            return res.status(404).json({ message: "Product not found" });
+            return res.status(404).json({ message: "book not found" });
         }
 
         const updatedbook = await Book.findById(id);
@@ -80,10 +79,20 @@ app.put('/api/book/:id', async (req, res) => {
     }
 });
 
+// DELETE route to delete a book by ID
+app.delete('/api/book/:id', async (req, res) => {
 
-
-
-
+    const { id } = req.params; 
+    try {
+        const deletedbook = await Book.findByIdAndDelete(id); // Find and delete the product by ID
+        if (!deletedbook) {
+            return res.status(404).json({ message: 'book not found' }); // Return 404 if product is not found
+        }
+        res.status(200).json({ message: 'book deleted successfully' }); // Return success message
+    } catch (error) {
+        res.status(500).json({ message: error.message }); // Handle any errors
+    }
+});
 
 mongoose.connect('mongodb+srv://user1:Thush12213@cluster0.9qwykfs.mongodb.net/BookStrore?retryWrites=true&w=majority&appName=Cluster0')
 .then(()=>{
