@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const Book = require("./Models/Bookmodel.js");
 
-const Book = require("./Models/Bookmodel.js")
+const cors = require('cors');
 
 const app =express();
 
