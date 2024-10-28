@@ -1,12 +1,24 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
-const Book = require("./Models/Bookmodel.js")
+const Book = require("./Models/Bookmodel.js");
+const { allowedNodeEnvironmentFlags } = require('process');
 
 const app =express();
 
 //middleware 
 app.use(express.json());
+// 1st option --> by using defaculty function we can be used 
+app.use(cors());
+// 2st option --> by using defaculty function we can be used 
+app.use(
+    cors({
+        
+        origin:"http://localhost:3000",
+        methods:["GET",'POST','PUT','DELETE'],
+        allowedHeaders:['content-Type'],
+    })
+)
 
 app.get('/', async (req, res) => {
     res.send(" hello serever is ready to paly");
