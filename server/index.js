@@ -99,7 +99,7 @@ app.delete('/api/book/:id', async (req, res) => {
     try {
         const deletedbook = await Book.findByIdAndDelete(id); // Find and delete the product by ID
         if (!deletedbook) {
-            return res.status(404).json({ message: 'book not found' }); // Return 404 if product is not found
+            return res.status(404).json({ message: 'book not found' }); 
         }
         res.status(200).json({ message: 'book deleted successfully' }); // Return success message
     } catch (error) {
