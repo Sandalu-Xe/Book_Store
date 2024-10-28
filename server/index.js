@@ -18,7 +18,7 @@ app.get('/', async (req, res) => {
 app.post('/api/book', async (req, res) => {
     try {
       
-      //  const Product = await Product.create(req.body);
+      //  const book = await Book.create(req.body);
 
       const { Book_name, Book_id, author } = req.body;
       const newbook = new Book({ Book_name,Book_id, author});
@@ -29,6 +29,61 @@ app.post('/api/book', async (req, res) => {
       res.status(500).json({ message: error.message });
     }
   });
+
+  //get all book from mongodb 
+
+  app.get('/api/books', async (req, res) => {
+    try {
+        // Retrieve all products from the database
+        const book = await Book.find({}); // Find all products
+
+        // Respond with the list of products
+        res.status(200).json(book);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+//dlete book from mongodb by using id 
+
+app.get('/api/book/:id', async (req, res) => {
+    const { id } = req.params; // Get the ID from the request parameters
+    try {
+        const book = await Book.findById(id); // Find the product by ID
+        if (!book) {
+            return res.status(404).json({ message: 'book not found' }); // Return 404 if not found
+        }
+        res.status(200).json(book); // Return the found product
+    } catch (error) {
+        res.status(500).json({ message: error.message }); // Handle any errors
+    }
+});
+
+
+//upadate the book  by id
+
+app.put('/api/book/:id', async (req, res) => {
+    try {
+        const { id } = req.params;//.Get the ID from the request parameters
+
+        const book = await Product.findByIdAndUpdate(id, req.body);
+
+        if (!book) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        const updatedbook = await Book.findById(id);
+        res.status(200).json(updatedbook);// Return the updated product
+
+    } catch (error) {
+        res.status(500).json({ message: error.message }); // Handle any errors
+    }
+});
+
+
+
+
+
 
 mongoose.connect('mongodb+srv://user1:Thush12213@cluster0.9qwykfs.mongodb.net/BookStrore?retryWrites=true&w=majority&appName=Cluster0')
 .then(()=>{
