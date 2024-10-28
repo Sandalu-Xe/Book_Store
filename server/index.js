@@ -1,14 +1,36 @@
 import express  from "express";
 import mongoose  from "mongoose";
+const router = express.Router();
+
+const Book = require("./Models/Bookmodel.js")
+
 const app =express();
 
-// import dotenv from "dotenv";
-
-// dotenv.config();
+//middleware 
+app.use(express.json());
 
 app.get('/', async (req, res) => {
     res.send(" hello serever is ready to paly");
 })
+
+
+//save book on the database 
+
+app.post('/api/book', async (req, res) => {
+    try {
+      
+      //  const Product = await Product.create(req.body);
+
+      const { Book_name, Book_id, author } = req.body;
+
+      const newbook = new Product({ Book_name,Book_id, author});
+      const savedbook = await newbook.save();
+      res.status(200).json(savedbook) 
+      
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  });
 
 mongoose.connect('mongodb+srv://user1:Thush12213@cluster0.9qwykfs.mongodb.net/BookStrore?retryWrites=true&w=majority&appName=Cluster0')
 .then(()=>{
@@ -24,3 +46,4 @@ mongoose.connect('mongodb+srv://user1:Thush12213@cluster0.9qwykfs.mongodb.net/Bo
 });
 
 console.log("hello there")
+
