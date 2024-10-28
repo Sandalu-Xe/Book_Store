@@ -2,7 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Book = require("./Models/Bookmodel.js");
-const { allowedNodeEnvironmentFlags } = require('process');
+
+const cors = require('cors');
 
 const app =express();
 
