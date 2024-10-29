@@ -109,7 +109,7 @@ app.delete('/api/book/:id', async (req, res) => {
 
 mongoose.connect('mongodb+srv://user1:Thush12213@cluster0.9qwykfs.mongodb.net/BookStrore?retryWrites=true&w=majority&appName=Cluster0')
 .then(()=>{
-    console.log("connected to the database sandalu 🚀🚀🚀🚀");
+    console.log("connected to the database sandalu 🚀🚀");
 
     app.listen(3333,()=>{
         console.log("server is running on port 3333");
@@ -121,3 +121,5 @@ mongoose.connect('mongodb+srv://user1:Thush12213@cluster0.9qwykfs.mongodb.net/Bo
 });
 
 console.log("hello there")
+
+
