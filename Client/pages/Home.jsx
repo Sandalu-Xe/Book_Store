@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Spinner from '../Components/Spinner.jsx';
-import { Link } from 'react-router-dom';
-import { AiOutlineEdit } from 'react-icons/ai';
-import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
-import BooksTable from '../Components/Home/BooksTable.jsx';
-import BooksCard from '../Components/Home/BooksCard.jsx';
+import { useParams } from 'react-router-dom';
+import BackButton from '../Components/BackButton';
+import Spinner from '../Components/Spinner';
 
-const Home = () => {
-  const [books, setBooks] = useState([]);
+const ShowBook = () => {
+  const [book, setBook] = useState({});
   const [loading, setLoading] = useState(false);
-  const [showType, setShowType] = useState('table');
+  const { id } = useParams();
 
   useEffect(() => {
     setLoading(true);
     axios
-      .get('http://localhost:5555/books')
+      .get(`http://localhost:5555/books/${id}`)
       .then((response) => {
-        setBooks(response.data.data);
+        setBook(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -29,35 +25,40 @@ const Home = () => {
 
   return (
     <div className='p-4'>
-      <div className='flex justify-center items-center gap-x-4'>
-        <button
-          className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
-          onClick={() => setShowType('table')}
-        >
-          Table
-        </button>
-        <button
-          className='bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg'
-          onClick={() => setShowType('card')}
-        >
-          Card
-        </button>
-      </div>
-      <div className='flex justify-between items-center'>
-        <h1 className='text-3xl my-8'>Books List</h1>
-        <Link to='/books/create'>
-          <MdOutlineAddBox className='text-sky-800 text-4xl' />
-        </Link>
-      </div>
+      <BackButton />
+      <h1 className='text-3xl my-4'>Show Book</h1>
       {loading ? (
         <Spinner />
-      ) : showType === 'table' ? (
-        <BooksTable books={books} />
       ) : (
-        <BooksCard books={books} />
+        <div className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4'>
+          <div className='my-4'>
+            <span className='text-xl mr-4 text-gray-500'>Id</span>
+            <span>{book._id}</span>
+          </div>
+          <div className='my-4'>
+            <span className='text-xl mr-4 text-gray-500'>Title</span>
+            <span>{book.title}</span>
+          </div>
+          <div className='my-4'>
+            <span className='text-xl mr-4 text-gray-500'>Author</span>
+            <span>{book.author}</span>
+          </div>
+          <div className='my-4'>
+            <span className='text-xl mr-4 text-gray-500'>Publish Year</span>
+            <span>{book.publishYear}</span>
+          </div>
+          <div className='my-4'>
+            <span className='text-xl mr-4 text-gray-500'>Create Time</span>
+            <span>{new Date(book.createdAt).toString()}</span>
+          </div>
+          <div className='my-4'>
+            <span className='text-xl mr-4 text-gray-500'>Last Update Time</span>
+            <span>{new Date(book.updatedAt).toString()}</span>
+          </div>
+        </div>
       )}
     </div>
   );
 };
 
-export default Home;
+export default ShowBook;
