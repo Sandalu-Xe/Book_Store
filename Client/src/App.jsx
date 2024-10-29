@@ -6,10 +6,9 @@ import CreateBook from '../pages/CreateBook';
 import UpdateBook from '../pages/UpdateBook';
 import DeleteBook from '../pages/DeleteBook';
 
-
-
 function App() {
   return (
+    
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
