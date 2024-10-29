@@ -53,5 +53,4 @@ const BooksTable = ({ books }) => {
     </table>
   );
 };
-
 export default BooksTable;
