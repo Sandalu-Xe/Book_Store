@@ -21,20 +21,20 @@ app.use(cors());
 //     })
 // )
 
-app.get('/', async (req, res) => {
+app.get('/books', async (req, res) => {
     res.send(" hello serever is ready to paly");
 })
 
 //save book on the database 
 
-app.post('/api/book', async (req, res) => {
+app.post('/books/create', async (req, res) => {
     try {
       
       //  const book = await Book.create(req.body);
 
       const { Book_name, Book_id, author } = req.body;
 
-      const newbook = new Product({ Book_name,Book_id, author});
+      const newbook = new Book({ Book_name,Book_id, author});
       const savedbook = await newbook.save();
       res.status(200).json(savedbook) 
       
@@ -45,7 +45,7 @@ app.post('/api/book', async (req, res) => {
 
   //get all book from mongodb 
 
-  app.get('/api/books', async (req, res) => {
+  app.get('/books/details', async (req, res) => {
     try {
         // Retrieve all products from the database
         const book = await Book.find({}); // Find all products
@@ -59,7 +59,7 @@ app.post('/api/book', async (req, res) => {
 
 //FIND book from mongodb by using id 
 
-app.get('/api/book/:id', async (req, res) => {
+app.get('/books/details/:id', async (req, res) => {
     const { id } = req.params; // Get the ID from the request parameters
     try {
         const book = await Book.findById(id); // Find the product by ID
@@ -74,7 +74,7 @@ app.get('/api/book/:id', async (req, res) => {
 
 //upadate the book by id
 
-app.put('/api/book/:id', async (req, res) => {
+app.put('/books/edit/:id', async (req, res) => {
     try {
         const { id } = req.params;//.Get the ID from the request parameters
 
@@ -93,7 +93,7 @@ app.put('/api/book/:id', async (req, res) => {
 });
 
 // DELETE route to delete a book by ID
-app.delete('/api/book/:id', async (req, res) => {
+app.delete('/books/delete/:id', async (req, res) => {
 
     const { id } = req.params; 
     try {
