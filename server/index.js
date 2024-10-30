@@ -45,7 +45,7 @@ app.post('/books/create', async (req, res) => {
     }
   });
 
-  
+
 
   app.get('/books/details', async (req, res) => {
     try {
@@ -123,5 +123,4 @@ mongoose.connect('mongodb+srv://user1:Thush12213@cluster0.9qwykfs.mongodb.net/Bo
 });
 
 console.log("hello there")
-
 
