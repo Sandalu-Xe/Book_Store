@@ -59,8 +59,6 @@ app.post('/books/create', async (req, res) => {
     }
 });
 
-
-
 app.get('/books/details/:id', async (req, res) => {
     const { id } = req.params; // Get the ID from the request parameters
     try {
@@ -76,6 +74,26 @@ app.get('/books/details/:id', async (req, res) => {
 
 
 app.put('/books/edit/:id', async (req, res) => {
+    try {
+        const { id } = req.params;//.Get the ID from the request parameters
+
+        const book = await Book.findByIdAndUpdate(id, req.body);
+
+        if (!book) {
+            return res.status(404).json({ message: "book not found" });
+        }
+
+        const updatedbook = await Book.findById(id);
+        res.status(200).json(updatedbook);// Return the updated product
+
+    } catch (error) {
+        res.status(500).json({ message: error.message }); // Handle any errors
+    }
+});
+
+
+// 
+app.get('/books/edit/:id', async (req, res) => {
     try {
         const { id } = req.params;//.Get the ID from the request parameters
 
