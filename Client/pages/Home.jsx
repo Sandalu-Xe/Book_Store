@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import BackButton from '../Components/BackButton';
 import Spinner from '../Components/Spinner';
-import BookDetails from'../Components/Home/BookDetails.jsx';
+
 const ShowBook = () => {
   const [book, setBook] = useState({});
   const [loading, setLoading] = useState(false);
