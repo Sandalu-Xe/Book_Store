@@ -4,6 +4,8 @@ import Spinner from '../Components/Spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import { Button, Form, Container } from 'react-bootstrap';
+
 
 const EditBook = () => {
   const [Book_name, setTitle] = useState('');
@@ -53,43 +55,45 @@ const EditBook = () => {
   };
 
   return (
-    <div className='p-4'>
-      <BackButton />
-      <h1 className='text-3xl my-4'>Edit Book</h1>
-      {loading ? <Spinner /> : ''}
-      <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Title</label>
-          <input
-            type='text'
+    <div className="p-4">
+    <BackButton />
+    <h1 className="display-5 my-4">Edit Book</h1>
+    {loading ? <Spinner animation="border" /> : ''}
+    <Container className="border border-primary rounded p-4" style={{ maxWidth: '600px' }}>
+      <Form>
+        <Form.Group className="mb-4">
+          <Form.Label className="text-muted">Title</Form.Label>
+          <Form.Control
+            type="text"
             value={Book_name}
             onChange={(e) => setTitle(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            className="border-secondary"
           />
-        </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Author</label>
-          <input
-            type='text'
+        </Form.Group>
+        <Form.Group className="mb-4">
+          <Form.Label className="text-muted">Author</Form.Label>
+          <Form.Control
+            type="text"
             value={author}
             onChange={(e) => setauthor(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            className="border-secondary"
           />
-        </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Book_id</label>
-          <input
-            type='number'
+        </Form.Group>
+        <Form.Group className="mb-4">
+          <Form.Label className="text-muted">Book_id</Form.Label>
+          <Form.Control
+            type="number"
             value={Book_id}
             onChange={(e) => setBook_id(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            className="border-secondary"
           />
-        </div>
-        <button className='p-2 bg-sky-300 m-8' onClick={handleEditBook}>
+        </Form.Group>
+        <Button variant="primary" className="w-100" onClick={handleEditBook}>
           Save
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Form>
+    </Container>
+  </div>
   )
 }
 
