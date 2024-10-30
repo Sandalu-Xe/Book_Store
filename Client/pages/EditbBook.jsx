@@ -6,21 +6,22 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
 const EditBook = () => {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
-  const [publishYear, setPublishYear] = useState('');
+  const [Book_name, setTitle] = useState('');
+  const [Book_id, setBook_id] = useState('');
+  const [author, setauthor] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const {id} = useParams();
   const { enqueueSnackbar } = useSnackbar();
 
+  
   useEffect(() => {
     setLoading(true);
     axios.get(`http://localhost:3333/books/edit/${id}`)
     .then((response) => {
-        setAuthor(response.data.author);
-        setPublishYear(response.data.publishYear)
-        setTitle(response.data.title)
+        setauthor(response.data.author);
+        setBook_id(response.data.Book_id)
+        setTitle(response.data.Book_name)
         setLoading(false);
       }).catch((error) => {
         setLoading(false);
@@ -31,9 +32,9 @@ const EditBook = () => {
   
   const handleEditBook = () => {
     const data = {
-      title,
+      Book_name,
+      Book_id,
       author,
-      publishYear,
     };
     setLoading(true);
     axios
@@ -61,7 +62,7 @@ const EditBook = () => {
           <label className='text-xl mr-4 text-gray-500'>Title</label>
           <input
             type='text'
-            value={title}
+            value={Book_name}
             onChange={(e) => setTitle(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2 w-full'
           />
@@ -71,16 +72,16 @@ const EditBook = () => {
           <input
             type='text'
             value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+            onChange={(e) => setauthor(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full '
           />
         </div>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Publish Year</label>
+          <label className='text-xl mr-4 text-gray-500'>Book_id</label>
           <input
             type='number'
-            value={publishYear}
-            onChange={(e) => setPublishYear(e.target.value)}
+            value={Book_id}
+            onChange={(e) => setBook_id(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full '
           />
         </div>
@@ -91,5 +92,6 @@ const EditBook = () => {
     </div>
   )
 }
+
 
 export default EditBook
