@@ -5,6 +5,7 @@ import CreateBook from '../pages/CreateBook.jsx';
 import ShowBook from '../pages/ShowBook.jsx';
 import EditBook from '../pages/EditbBook.jsx';
 import DeleteBook from '../pages/DeleteBook';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (
