@@ -23,7 +23,7 @@ app.use(cors());
 //     })
 // )
 
-app.get('/books', async (req, res) => {
+app.get('/book', async (req, res) => {
     res.send(" hello serever is ready to paly");
 })
 
@@ -47,7 +47,7 @@ app.post('/books/create', async (req, res) => {
 
 
 
-  app.get('/books/details', async (req, res) => {
+  app.get('/books', async (req, res) => {
     try {
         // Retrieve all products from the database
         const book = await Book.find({}); // Find all products
