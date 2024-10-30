@@ -11,6 +11,8 @@ const app =express();
 app.use(express.json());
 // 1st option --> by using defaculty function we can be used 
 app.use(cors());
+
+
 // 2st option --> by using defaculty function we can be used 
 // app.use(
 //     cors({
@@ -43,7 +45,7 @@ app.post('/books/create', async (req, res) => {
     }
   });
 
-  //get all book from mongodb 
+  
 
   app.get('/books/details', async (req, res) => {
     try {
@@ -57,7 +59,7 @@ app.post('/books/create', async (req, res) => {
     }
 });
 
-//FIND book from mongodb by using id 
+
 
 app.get('/books/details/:id', async (req, res) => {
     const { id } = req.params; // Get the ID from the request parameters
@@ -72,7 +74,6 @@ app.get('/books/details/:id', async (req, res) => {
     }
 });
 
-//upadate the book by id
 
 app.put('/books/edit/:id', async (req, res) => {
     try {
@@ -92,7 +93,7 @@ app.put('/books/edit/:id', async (req, res) => {
     }
 });
 
-// DELETE route to delete a book by ID
+
 app.delete('/books/delete/:id', async (req, res) => {
 
     const { id } = req.params; 
@@ -106,6 +107,7 @@ app.delete('/books/delete/:id', async (req, res) => {
         res.status(500).json({ message: error.message }); // Handle any errors
     }
 });
+
 
 mongoose.connect('mongodb+srv://user1:Thush12213@cluster0.9qwykfs.mongodb.net/BookStrore?retryWrites=true&w=majority&appName=Cluster0')
 .then(()=>{
