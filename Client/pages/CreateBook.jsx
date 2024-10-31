@@ -4,6 +4,7 @@ import Spinner from '../Components/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 
 const CreateBooks = () => {
   const [title, setTitle] = useState('');
@@ -36,43 +37,51 @@ const CreateBooks = () => {
   };
 
   return (
-    <div className='p-4'>
-      <BackButton />
-      <h1 className='text-3xl my-4'>Create Book</h1>
-      {loading ? <Spinner /> : ''}
-      <div className='flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto'>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Title</label>
-          <input
-            type='text'
+   
+<div className='p-4'>
+  <BackButton />
+  <h1 className='text-3xl my-4'>Create Book</h1>
+  {loading && <Spinner animation="border" />}
+  <Container className="d-flex justify-content-center">
+    <Card border="primary" className="p-4 w-100" style={{ maxWidth: '600px' }}>
+      <Form>
+        <Form.Group controlId="formTitle" className="my-4">
+          <Form.Label className="text-muted text-xl">Title</Form.Label>
+          <Form.Control
+            type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2 w-full'
+            className="border border-secondary px-4 py-2"
           />
-        </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Author</label>
-          <input
-            type='text'
+        </Form.Group>
+        
+        <Form.Group controlId="formAuthor" className="my-4">
+          <Form.Label className="text-muted text-xl">Author</Form.Label>
+          <Form.Control
+            type="text"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            className="border border-secondary px-4 py-2"
           />
-        </div>
-        <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Publish Year</label>
-          <input
-            type='number'
+        </Form.Group>
+        
+        <Form.Group controlId="formPublishYear" className="my-4">
+          <Form.Label className="text-muted text-xl">Publish Year</Form.Label>
+          <Form.Control
+            type="number"
             value={publishYear}
             onChange={(e) => setPublishYear(e.target.value)}
-            className='border-2 border-gray-500 px-4 py-2  w-full '
+            className="border border-secondary px-4 py-2"
           />
-        </div>
-        <button className='p-2 bg-sky-300 m-8' onClick={handleSaveBook}>
+        </Form.Group>
+        
+        <Button variant="primary" className="m-2" onClick={handleSaveBook}>
           Save
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Form>
+    </Card>
+  </Container>
+</div>
   );
 }
 
