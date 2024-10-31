@@ -4,21 +4,21 @@ import Spinner from '../Components/Spinner';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Container, Card } from 'react-bootstrap';
 
 const CreateBooks = () => {
-  const [title, setTitle] = useState('');
+  const [Book_name, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [publishYear, setPublishYear] = useState('');
+  const [Book_id, setPublishYear] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleSaveBook = () => {
     const data = {
-      title,
+      Book_name,
+      Book_id,
       author,
-      publishYear,
     };
     setLoading(true);
     axios
@@ -46,17 +46,17 @@ const CreateBooks = () => {
     <Card border="primary" className="p-4 w-100" style={{ maxWidth: '600px' }}>
       <Form>
         <Form.Group controlId="formTitle" className="my-4">
-          <Form.Label className="text-muted text-xl">Title</Form.Label>
+          <Form.Label className="text-muted text-xl">Book Name</Form.Label>
           <Form.Control
             type="text"
-            value={title}
+            value={Book_name}
             onChange={(e) => setTitle(e.target.value)}
             className="border border-secondary px-4 py-2"
           />
         </Form.Group>
         
         <Form.Group controlId="formAuthor" className="my-4">
-          <Form.Label className="text-muted text-xl">Author</Form.Label>
+          <Form.Label className="text-muted text-xl">Author Name</Form.Label>
           <Form.Control
             type="text"
             value={author}
@@ -66,15 +66,14 @@ const CreateBooks = () => {
         </Form.Group>
         
         <Form.Group controlId="formPublishYear" className="my-4">
-          <Form.Label className="text-muted text-xl">Publish Year</Form.Label>
+          <Form.Label className="text-muted text-xl">Book Id</Form.Label>
           <Form.Control
             type="number"
-            value={publishYear}
+            value={Book_id}
             onChange={(e) => setPublishYear(e.target.value)}
             className="border border-secondary px-4 py-2"
           />
         </Form.Group>
-        
         <Button variant="primary" className="m-2" onClick={handleSaveBook}>
           Save
         </Button>

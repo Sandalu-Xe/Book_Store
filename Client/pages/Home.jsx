@@ -15,7 +15,9 @@ const ShowBook = () => {
     axios
       .get(`http://localhost:3334`)
       .then((response) => {
-        setBook(response.data);
+        setauthor(response.data.author);
+        setBook(response.data.Book_id)
+        setTitle(response.data.Book_name)
         setLoading(false);
       })
       .catch((error) => {
@@ -38,7 +40,7 @@ const ShowBook = () => {
             <Col>{book.Book_id}</Col>
           </Row>
           <Row className="my-4">
-            <Col className="text-xl text-muted" md="auto">Title</Col>
+            <Col className="text-xl text-muted" md="auto">Book Name</Col>
             <Col>{book.Book_name}</Col>
           </Row>
           <Row className="my-4">
