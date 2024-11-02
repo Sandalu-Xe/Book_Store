@@ -21,7 +21,7 @@ const ShowBook = () => {
       .catch((error) => {
         console.log(error);
         setLoading(false);
-      });t
+      });
   }, []);
 
   return (
