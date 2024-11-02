@@ -16,7 +16,6 @@ const EditBook = () => {
   const {id} = useParams();
   const { enqueueSnackbar } = useSnackbar();
 
-  
   useEffect(() => {
     setLoading(true);
     axios.get(`http://localhost:3333/books/edit/${id}`)
@@ -96,7 +95,5 @@ const EditBook = () => {
   </div>
   )
 }
-
-
 export default EditBook
 

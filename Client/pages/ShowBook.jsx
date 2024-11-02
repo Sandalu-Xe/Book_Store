@@ -13,7 +13,7 @@ const ShowBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:3333/books/details/${id}`)
+      .get(`http://localhost:333/books/details/${id}`)
       .then((response) => {
         setBook(response.data);
         setLoading(false);
@@ -35,7 +35,7 @@ const ShowBook = () => {
         <Card border="primary" className="p-4 w-auto">
           <Row className="my-4">
             <Col className="text-xl text-muted" md="auto">Id</Col>
-            <Col>{book.Book_id}</Col>
+            <Col>{book._id}</Col>
           </Row>
           <Row className="my-4">
             <Col className="text-xl text-muted" md="auto">Title</Col>
