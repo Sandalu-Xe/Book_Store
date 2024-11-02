@@ -1,69 +1,54 @@
 import React, { useEffect, useState } from 'react';
+import Table from 'react-bootstrap/Table';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import BackButton from '../Components/BackButton';
-import Spinner from '../Components/Spinner';
-import {  Card, Container, Row, Col } from 'react-bootstrap';
 
-const ShowBook = () => {
-  const [book, setBook] = useState({});
-  const [loading, setLoading] = useState(false);
-  const { id } = useParams();
+const BooksList = () => {
+  const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get(`http://localhost:3333`)
-      .then((response) => {
-        setauthor(response.data.author);
-        setBook(response.data.Book_id)
-        setTitle(response.data.Book_name)
+    // Fetch books from the backend API
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get('http://localhost:3333/books');
+        setBooks(response.data); // Update books state with fetched data
         setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
+      } catch (err) {
+        setError("Failed to fetch books. Please try again later.");
         setLoading(false);
-      });
+      }
+    };
+
+    fetchBooks();
   }, []);
 
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
-    <div className='p-4'>
-    <BackButton />
-    <h1 className='text-3xl my-4'>Show Book</h1>
-    {loading ? (
-      <Spinner animation="border" />
-    ) : (
-      <Container className="d-flex justify-content-center">
-        <Card border="primary" className="p-4 w-auto">
-          <Row className="my-4">
-            <Col className="text-xl text-muted" md="auto">Id</Col>
-            <Col>{book.Book_id}</Col>
-          </Row>
-          <Row className="my-4">
-            <Col className="text-xl text-muted" md="auto">Book Name</Col>
-            <Col>{book.Book_name}</Col>
-          </Row>
-          <Row className="my-4">
-            <Col className="text-xl text-muted" md="auto">Author</Col>
-            <Col>{book.author}</Col>
-          </Row>
-          <Row className="my-4">
-            <Col className="text-xl text-muted" md="auto">Publish Year</Col>
-            <Col>{book.publishYear}</Col>
-          </Row>
-          <Row className="my-4">
-            <Col className="text-xl text-muted" md="auto">Create Time</Col>
-            <Col>{new Date(book.createdAt).toString()}</Col>
-          </Row>
-          <Row className="my-4">
-            <Col className="text-xl text-muted" md="auto">Last Update Time</Col>
-            <Col>{new Date(book.updatedAt).toString()}</Col>
-          </Row>
-        </Card>
-      </Container>
-    )}
-  </div>
+    <div>
+      <h2>Books List</h2>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+          </tr>
+        </thead>
+        <tbody>
+          {books.map((book) => (
+            <tr key={book._id}>
+              <td>{book._id}</td>
+              <td>{book.Book_name}</td>
+              <td>{book.author}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
   );
 };
 
-export default ShowBook;
+export default BooksList;
