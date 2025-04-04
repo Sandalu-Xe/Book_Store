@@ -133,7 +133,7 @@ mongoose.connect('mongodb+srv://user1:Thush12213@cluster0.9qwykfs.mongodb.net/Bo
 
     app.listen(3333,()=>{
         console.log("server is running on port 3333");
-    
+
     });
 })
 .catch((err)=>{

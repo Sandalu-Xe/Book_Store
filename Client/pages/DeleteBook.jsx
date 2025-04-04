@@ -37,7 +37,7 @@ import { useSnackbar } from 'notistack';
         <h3 className='text-2xl'>Are You Sure You want to delete this book?</h3>
 
         <button
-          className='p-4 bg-red-600 text-white m-8 w-full'
+          className='p-4 bg-red-600 text-black m-8 w-full'
           onClick={handleDeleteBook}
         >
           Yes, Delete it
